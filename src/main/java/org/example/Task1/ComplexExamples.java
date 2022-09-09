@@ -58,6 +58,7 @@ public class ComplexExamples {
             new Person(6, "Amelia"),
             new Person(7, "Amelia"),
             new Person(8, "Amelia"),
+
     };
 
 
@@ -71,15 +72,19 @@ public class ComplexExamples {
         System.out.println();
         System.out.println("**************************************************");
         System.out.println("Duplicate filtered, grouped by name, sorted by name and id:");
-
-        Map<String, Long> arr = Arrays.stream(RAW_DATA).distinct().sorted((a, b) -> a.getName().compareTo(b.getName()))
-                .collect(Collectors.groupingBy(Person::getName, LinkedHashMap::new, Collectors.counting()));
-        for(Map.Entry<String, Long> array : arr.entrySet()){
-
-            System.out.println("Key :" + array.getKey());
-            System.out.println("Value:" + array.getValue().toString());
+        if(RAW_DATA == null) {
+            new RuntimeException("Array is null! Please try again!");
         }
 
+
+
+        Arrays.stream(RAW_DATA)
+                .filter(Objects::nonNull)
+                .filter(obj -> obj.getName() != null)
+                .distinct()
+                .sorted((a, b) -> a.getName().compareTo(b.getName()))
+                .collect(Collectors.groupingBy(Person::getName, LinkedHashMap::new, Collectors.counting()))
+                .forEach((a, b) -> System.out.printf("Key: %s\nValue:%d\n", a, b));
 
         System.out.println();
 
