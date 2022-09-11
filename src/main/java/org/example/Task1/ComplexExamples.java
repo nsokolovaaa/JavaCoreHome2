@@ -72,9 +72,7 @@ public class ComplexExamples {
         System.out.println();
         System.out.println("**************************************************");
         System.out.println("Duplicate filtered, grouped by name, sorted by name and id:");
-        if(RAW_DATA == null) {
-            new RuntimeException("Array is null! Please try again!");
-        }
+
 
 
 
